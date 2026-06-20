@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexum | Beyond the Obvious</title>
+  <meta name="description" content="Nexum é uma plataforma científica internacional que conecta pesquisadores do Brasil e de Cabo Verde para acelerar colaboração, evidências e impacto em saúde pública." />
+  <style>
+    :root {
+      --blue: #54b2de;
+      --blue-dark: #2f91c2;
+      --dark: #4d4d4d;
+      --ink: #272727;
+      --muted: #6f7478;
+      --line: #e6edf1;
+      --soft: #f5f8fa;
+      --soft-blue: #eef8fd;
+      --white: #ffffff;
+      --shadow: 0 20px 60px rgba(28, 58, 74, 0.12);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--dark);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(84, 178, 222, 0.14), transparent 34rem),
+        radial-gradient(circle at 85% 20%, rgba(84, 178, 222, 0.09), transparent 32rem),
+        linear-gradient(180deg, #ffffff 0%, #f7fafc 55%, #ffffff 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--max));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      border-bottom: 1px solid rgba(230, 237, 241, 0.82);
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .brand span {
+      display: block;
+      line-height: 1;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 0.28rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.94rem;
+      color: #596167;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue-dark);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      padding: 0.82rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-weight: 750;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      box-shadow: 0 16px 34px rgba(84, 178, 222, 0.28);
+    }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: var(--white);
+      border-color: var(--line);
+      box-shadow: 0 12px 26px rgba(28, 58, 74, 0.08);
+    }
+
+    .btn-ghost {
+      min-height: 42px;
+      padding: 0.7rem 1rem;
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    section {
+      scroll-margin-top: 96px;
+    }
+
+    .hero {
+      position: relative;
+      padding: 154px 0 92px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .badge {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.78rem;
+      border: 1px solid rgba(84, 178, 222, 0.28);
+      border-radius: 999px;
+      background: rgba(238, 248, 253, 0.82);
+      color: #347f9f;
+      font-size: 0.88rem;
+      font-weight: 750;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero h1 {
+      color: var(--ink);
+      font-size: clamp(2.6rem, 6vw, 5.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.075em;
+      font-weight: 850;
+      max-width: 820px;
+    }
+
+    .hero h1 strong {
+      color: var(--blue-dark);
+      font-weight: 850;
+    }
+
+    .hero-subtitle {
+      max-width: 720px;
+      margin: 1.35rem 0 2rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.26rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      color: #727b80;
+      font-size: 0.95rem;
+    }
+
+    .hero-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 520px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(160deg, rgba(84, 178, 222, 0.16), rgba(255, 255, 255, 0.92)),
+        var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 1.25rem;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(84, 178, 222, 0.18);
+      filter: blur(1px);
+    }
+
+    .orb-one {
+      width: 210px;
+      height: 210px;
+      top: -70px;
+      right: -60px;
+    }
+
+    .orb-two {
+      width: 150px;
+      height: 150px;
+      bottom: 36px;
+      left: -52px;
+    }
+
+    .network-panel {
+      position: relative;
+      height: 100%;
+      min-height: 488px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      display: grid;
+      place-items: center;
+    }
+
+    .network-svg {
+      width: min(88%, 420px);
+      height: auto;
+      filter: drop-shadow(0 22px 35px rgba(42, 92, 116, 0.13));
+    }
+
+    .floating-card {
+      position: absolute;
+      width: min(260px, 64%);
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 36px rgba(28, 58, 74, 0.12);
+    }
+
+    .floating-card.top {
+      top: 32px;
+      left: 28px;
+    }
+
+    .floating-card.bottom {
+      right: 28px;
+      bottom: 32px;
+    }
+
+    .floating-card b {
+      display: block;
+      color: var(--ink);
+      font-size: 0.96rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .floating-card p {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .section-head {
+      max-width: 720px;
+      margin: 0 auto 2.4rem;
+      text-align: center;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 0.7rem;
+      color: var(--blue-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+    }
+
+    .section-head h2 {
+      color: var(--ink);
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.05;
+      letter-spacing: -0.055em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .about {
+      padding: 82px 0;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      padding: 1.45rem;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 34px rgba(28, 58, 74, 0.07);
+      min-height: 232px;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+      font-weight: 850;
+      margin-bottom: 1.15rem;
+    }
+
+    .card h3 {
+      color: var(--ink);
+      font-size: 1.1rem;
+      line-height: 1.2;
+      margin-bottom: 0.65rem;
+      letter-spacing: -0.025em;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .how {
+      padding: 82px 0;
+      background: linear-gradient(180deg, rgba(238, 248, 253, 0.62), rgba(255, 255, 255, 0.7));
+      border-block: 1px solid var(--line);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding: 1.5rem;
+      min-height: 244px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--line);
+    }
+
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 850;
+      margin-bottom: 1.1rem;
+      box-shadow: 0 12px 24px rgba(84, 178, 222, 0.25);
+    }
+
+    .step h3 {
+      color: var(--ink);
+      font-size: 1.07rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .stats {
+      padding: 42px 0;
+    }
+
+    .stats-banner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 22px 50px rgba(84, 178, 222, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.36);
+    }
+
+    .stat-item {
+      padding: 2rem 1.2rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color: var(--white);
+    }
+
+    .stat-item strong {
+      display: block;
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.065em;
+    }
+
+    .stat-item span {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 700;
+      opacity: 0.94;
+    }
+
+    .interest {
+      padding: 82px 0 96px;
+    }
+
+    .form-wrap {
+      display: grid;
+      grid-template-columns: 0.84fr 1.16fr;
+      gap: 1.3rem;
+      align-items: stretch;
+    }
+
+    .form-aside,
+    .form-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .form-aside {
+      padding: 2rem;
+      background:
+        radial-gradient(circle at top right, rgba(84, 178, 222, 0.27), transparent 18rem),
+        linear-gradient(150deg, #343434, var(--dark));
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 520px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .form-aside::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -110px;
+      bottom: -120px;
+      border-radius: 999px;
+      background: rgba(84, 178, 222, 0.24);
+    }
+
+    .form-aside h2 {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+      margin-bottom: 1rem;
+    }
+
+    .form-aside p {
+      position: relative;
+      z-index: 1;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1.02rem;
+    }
+
+    .aside-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 2rem;
+    }
+
+    .aside-list span {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 650;
+    }
+
+    .aside-list i {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(84, 178, 222, 0.22);
+      color: var(--white);
+      font-style: normal;
+    }
+
+    .aside-contact {
+      position: relative;
+      z-index: 1;
+      margin-top: 2rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.94rem;
+    }
+
+    .form-card {
+      padding: 2rem;
+      background: var(--white);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #4d565b;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfdfe;
+      color: var(--ink);
+      padding: 0.92rem 1rem;
+      outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    textarea {
+      min-height: 138px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(84, 178, 222, 0.78);
+      box-shadow: 0 0 0 4px rgba(84, 178, 222, 0.13);
+      background: var(--white);
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.3rem;
+    }
+
+    .form-actions .btn {
+      border: 0;
+      min-width: 188px;
+    }
+
+    .form-actions .btn[disabled] {
+      opacity: 0.68;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status-message {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.78rem 0.95rem;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .status-message.success {
+      display: block;
+      color: #1f6b45;
+      background: #edf8f1;
+      border: 1px solid #ccebd8;
+    }
+
+    .status-message.error {
+      display: block;
+      color: #8a352f;
+      background: #fff0ef;
+      border: 1px solid #f3cbc8;
+    }
+
+    .footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      background: #f9fbfc;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer strong {
+      color: var(--ink);
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .form-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .hero-visual {
+        min-height: 440px;
+      }
+
+      .network-panel {
+        min-height: 408px;
+      }
+
+      .cards-grid,
+      .steps,
+      .stats-banner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav-inner {
+        height: 68px;
+      }
+
+      .brand small {
+        display: none;
+      }
+
+      .logo-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .btn-ghost {
+        min-height: 38px;
+        padding: 0.62rem 0.84rem;
+        font-size: 0.88rem;
+      }
+
+      .hero {
+        padding: 116px 0 64px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 380px;
+        padding: 0.85rem;
+      }
+
+      .network-panel {
+        min-height: 350px;
+      }
+
+      .floating-card {
+        width: calc(100% - 2rem);
+        left: 1rem !important;
+        right: 1rem !important;
+      }
+
+      .floating-card.bottom {
+        bottom: 1rem;
+      }
+
+      .floating-card.top {
+        top: 1rem;
+      }
+
+      .cards-grid,
+      .steps,
+      .stats-banner,
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .form-aside,
+      .form-card {
+        padding: 1.35rem;
+        border-radius: 24px;
+      }
+
+      .form-aside {
+        min-height: auto;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Navegação principal">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Nexum - início">
+        <svg class="logo-mark" viewBox="0 0 96 96" role="img" aria-label="Logo Nexum">
+          <defs>
+            <linearGradient id="nexumGradient" x1="12" y1="10" x2="86" y2="88" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#54b2de" />
+              <stop offset="1" stop-color="#2f91c2" />
+            </linearGradient>
+          </defs>
+          <rect x="4" y="4" width="88" height="88" rx="24" fill="#ffffff" stroke="#e6edf1" />
+          <path d="M48 15 L79 38 L67 75 H29 L17 38 Z" fill="none" stroke="url(#nexumGradient)" stroke-width="5" stroke-linejoin="round" />
+          <path d="M30 38 H66 M38 24 L48 48 L58 24 M31 64 L48 48 L65 64" fill="none" stroke="#4d4d4d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.88" />
+          <circle cx="48" cy="48" r="6" fill="#54b2de" />
+          <circle cx="17" cy="38" r="5" fill="#4d4d4d" />
+          <circle cx="79" cy="38" r="5" fill="#4d4d4d" />
+          <circle cx="29" cy="75" r="5" fill="#54b2de" />
+          <circle cx="67" cy="75" r="5" fill="#54b2de" />
+        </svg>
+        <span>
+          <span>Nexum</span>
+          <small>Beyond the Obvious</small>
+        </span>
+      </a>
+
+      <div class="nav-links" aria-label="Links da página">
+        <a href="#sobre">Sobre</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#interesse">Contato</a>
+      </div>
+
+      <a class="btn btn-ghost" href="#interesse">Quero Participar</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">Rede científica internacional • Brasil 🇧🇷 + Cabo Verde 🇨🇻</div>
+          <h1>Nexum conecta ciência, saúde e colaboração entre <strong>Brasil 🇧🇷</strong> e <strong>Cabo Verde 🇨🇻</strong>.</h1>
+          <p class="hero-subtitle">
+            Uma plataforma digital para aproximar pesquisadores, profissionais da saúde, universidades, hospitais, gestores e centros de pesquisa, acelerando a troca de evidências, protocolos, experiências e soluções em saúde pública.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#interesse">Quero participar</a>
+            <a class="btn btn-secondary" href="#sobre">Conhecer a proposta</a>
+          </div>
+          <div class="hero-note" aria-label="Diferenciais da plataforma">
+            <span>● Evidências rápidas</span>
+            <span>● Conexões qualificadas</span>
+            <span>● Impacto internacional</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <span class="orb orb-one"></span>
+          <span class="orb orb-two"></span>
+          <div class="network-panel">
+            <svg class="network-svg" viewBox="0 0 420 420">
+              <defs>
+                <linearGradient id="networkGradient" x1="82" y1="54" x2="340" y2="358" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#54b2de" />
+                  <stop offset="1" stop-color="#2f91c2" />
+                </linearGradient>
+              </defs>
+              <path d="M210 55 L352 158 L298 325 H122 L68 158 Z" fill="rgba(84,178,222,0.08)" stroke="url(#networkGradient)" stroke-width="8" stroke-linejoin="round" />
+              <path d="M112 160 H310 M154 88 L210 210 L266 88 M122 292 L210 210 L298 292 M112 160 L210 210 L310 160" fill="none" stroke="#4d4d4d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.72" />
+              <circle cx="210" cy="210" r="28" fill="#54b2de" />
+              <circle cx="210" cy="210" r="12" fill="#ffffff" />
+              <circle cx="68" cy="158" r="16" fill="#4d4d4d" />
+              <circle cx="352" cy="158" r="16" fill="#4d4d4d" />
+              <circle cx="210" cy="55" r="16" fill="#54b2de" />
+              <circle cx="122" cy="325" r="16" fill="#54b2de" />
+              <circle cx="298" cy="325" r="16" fill="#54b2de" />
+              <circle cx="154" cy="88" r="9" fill="#4d4d4d" opacity="0.78" />
+              <circle cx="266" cy="88" r="9" fill="#4d4d4d" opacity="0.78" />
+              <circle cx="112" cy="160" r="9" fill="#54b2de" />
+              <circle cx="310" cy="160" r="9" fill="#54b2de" />
+            </svg>
+            <div class="floating-card top">
+              <b>Compartilhe descobertas</b>
+              <p>Resultados, protocolos e experiências circulando entre equipes que enfrentam desafios semelhantes.</p>
+            </div>
+            <div class="floating-card bottom">
+              <b>Ganhe tempo científico</b>
+              <p>Conecte quem já encontrou caminhos com quem precisa transformar evidência em ação.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="sobre">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Sobre a Nexum</span>
+          <h2>Uma ponte científica para ir além do óbvio.</h2>
+          <p>
+            A Nexum nasce para reduzir distâncias entre países, instituições e pesquisadores, criando um ambiente de colaboração ágil, seguro e orientado a impacto real.
+          </p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-icon">01</div>
+            <h3>Colaboração Internacional</h3>
+            <p>Integra pesquisadores e instituições do Brasil e de Cabo Verde em uma rede científica voltada à cooperação contínua.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">02</div>
+            <h3>Rede de Pesquisadores</h3>
+            <p>Facilita a identificação de especialistas, linhas de pesquisa, grupos ativos e oportunidades de parceria acadêmica.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">03</div>
+            <h3>Impacto Real</h3>
+            <p>Transforma conhecimento em soluções práticas para desafios de saúde pública, gestão e assistência em diferentes contextos.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">04</div>
+            <h3>Troca de Conhecimento</h3>
+            <p>Permite compartilhar evidências, protocolos, fotos, resultados, relatos técnicos e experiências de campo com mais agilidade.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="como-funciona">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">Como funciona</span>
+          <h2>Da conexão inicial à solução compartilhada.</h2>
+          <p>
+            A plataforma organiza a colaboração científica em etapas simples para que a informação certa chegue mais rápido às pessoas certas.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <span class="step-number">1</span>
+            <h3>Cadastro do perfil</h3>
+            <p>Pesquisadores, profissionais, gestores e instituições registram áreas de atuação, interesses e experiências.</p>
+          </article>
+
+          <article class="step">
+            <span class="step-number">2</span>
+            <h3>Mapeamento de interesses</h3>
+            <p>A Nexum aproxima pessoas e grupos que trabalham com temas semelhantes ou problemas complementares.</p>
+          </article>
+
+          <article class="step">
+            <span class="step-number">3</span>
+            <h3>Compartilhamento científico</h3>
+            <p>Protocolos, evidências, resultados, registros e soluções podem ser compartilhados para acelerar decisões e pesquisas.</p>
+          </article>
+
+          <article class="step">
+            <span class="step-number">4</span>
+            <h3>Construção de impacto</h3>
+            <p>As conexões geram projetos, respostas técnicas, cooperação institucional e novas estratégias em saúde pública.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Indicadores da Nexum">
+      <div class="container">
+        <div class="stats-banner">
+          <div class="stat-item">
+            <strong>2</strong>
+            <span>países</span>
+          </div>
+          <div class="stat-item">
+            <strong>+50</strong>
+            <span>pesquisadores</span>
+          </div>
+          <div class="stat-item">
+            <strong>+10</strong>
+            <span>áreas</span>
+          </div>
+          <div class="stat-item">
+            <strong>1</strong>
+            <span>missão</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="interest" id="interesse">
+      <div class="container form-wrap">
+        <aside class="form-aside">
+          <div>
+            <span class="section-kicker" style="color:#8ed3f1;">Participe da rede</span>
+            <h2>Compartilhe sua área, sua instituição e sua visão.</h2>
+            <p>
+              Queremos reunir pessoas dispostas a construir uma ponte científica entre Brasil e Cabo Verde, com colaboração, velocidade e impacto social.
+            </p>
+            <div class="aside-list">
+              <span><i>✓</i> Conexões entre pesquisadores e profissionais</span>
+              <span><i>✓</i> Troca de evidências e protocolos</span>
+              <span><i>✓</i> Soluções aplicadas à saúde pública</span>
+            </div>
+          </div>
+          <div class="aside-contact">
+            <strong>Contato:</strong> nexumbracab@gmail.com<br />
+            <strong>Slogan:</strong> Beyond the Obvious
+          </div>
+        </aside>
+
+        <div class="form-card">
+          <form id="interestForm" aria-label="Formulário de interesse Nexum">
+            <input type="hidden" name="_subject" value="Novo interesse na plataforma Nexum" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+
+            <div class="field">
+              <label for="nome">Nome</label>
+              <input id="nome" name="nome" type="text" placeholder="Seu nome completo" required />
+            </div>
+
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" placeholder="seuemail@exemplo.com" required />
+            </div>
+
+            <div class="field">
+              <label for="pais">País</label>
+              <select id="pais" name="pais" required>
+                <option value="" selected disabled>Selecione</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Cabo Verde">Cabo Verde</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="perfil">Perfil</label>
+              <select id="perfil" name="perfil" required>
+                <option value="" selected disabled>Selecione</option>
+                <option value="Pesquisador(a)">Pesquisador(a)</option>
+                <option value="Profissional da saúde">Profissional da saúde</option>
+                <option value="Gestor(a)">Gestor(a)</option>
+                <option value="Estudante">Estudante</option>
+                <option value="Instituição">Instituição</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="instituicao">Instituição</label>
+              <input id="instituicao" name="instituicao" type="text" placeholder="Universidade, hospital, laboratório ou órgão" required />
+            </div>
+
+            <div class="field">
+              <label for="area">Área de atuação</label>
+              <input id="area" name="area" type="text" placeholder="Ex.: saúde pública, imunologia, gestão" required />
+            </div>
+
+            <div class="field full">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" placeholder="Conte brevemente como você gostaria de participar da Nexum." required></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" id="submitButton" type="submit">Enviar interesse</button>
+              <p class="status-message" id="formStatus" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p><strong>Nexum</strong> — Beyond the Obvious</p>
+      <p>Contato: <a href="mailto:nexumbracab@gmail.com">nexumbracab@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("interestForm");
+    const submitButton = document.getElementById("submitButton");
+    const formStatus = document.getElementById("formStatus");
+    const endpoint = "https://formsubmit.co/ajax/nexumbracab@gmail.com";
+
+    function setStatus(type, message) {
+      formStatus.className = "status-message " + type;
+      formStatus.textContent = message;
+    }
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const originalText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = "Enviando...";
+      formStatus.className = "status-message";
+      formStatus.textContent = "";
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error("Falha no envio");
+        }
+
+        form.reset();
+        setStatus("success", "Interesse enviado com sucesso! Em breve entraremos em contato.");
+      } catch (error) {
+        setStatus("error", "Não foi possível enviar agora. Tente novamente em instantes ou envie um e-mail para nexumbracab@gmail.com.");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+    });
+  </script>
+</body>
+</html>
